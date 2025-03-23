@@ -15,7 +15,7 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Afficher la page d'inscription.
      */
     public function create(): View
     {
@@ -23,22 +23,34 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * Gérer la requête d'inscription.
      */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Doctor::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:doctors,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'phone' => ['required', 'string', 'max:20'],
+            'specialty' => ['required', 'string', 'max:100'], 
+            'opening_time' => ['required', 'date_format:H:i'], 
+            'closing_time' => ['required', 'date_format:H:i'], 
+            'working_days' => ['required', 'array'], // Validation des jours de travail
+            'working_days.*' => ['in:Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday'], 
         ]);
 
+        // Créer un nouvel utilisateur
         $user = Doctor::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'specialty' => $request->specialty, 
+            'working_hours' => json_encode([
+                'opening_time' => $request->opening_time,
+                'closing_time' => $request->closing_time
+            ]), 
+            'working_days' => json_encode($request->working_days), // Stocker les jours en JSON
         ]);
 
         event(new Registered($user));

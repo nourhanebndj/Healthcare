@@ -1,16 +1,10 @@
 <?php
-use App\Http\Controllers\Admin\SpecialityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ListedespatientsController;
 
 
-
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-Route::prefix('admin')->middleware(['auth'])->group(function () {
-    Route::resource('specialities', SpecialityController::class);
-});
 
 // Route de test MongoDB
 Route::get('/test-mongodb', function () {

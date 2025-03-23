@@ -44,11 +44,12 @@
                     </li>
                     <h3 class="text-lg font-semibold mt-4">Account</h3>
                     <li>
-                        <a href="{{ route('admin.profile.edit') }}" class="flex items-center p-2 w-full hover:bg-gray-100">
+                        <a href="<?php echo e(route('admin.profile.edit')); ?>" class="flex items-center p-2 w-full hover:bg-gray-100">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
-                            {{ __('Profile') }}
+                            <?php echo e(__('Profile')); ?>
+
                         </a>
                     </li>
                     
@@ -61,8 +62,8 @@
                             Signout
                         </a>
                     
-                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                            @csrf
+                        <form id="logout-form" action="<?php echo e(route('admin.logout')); ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
                         </form>
                     </li>
                     
@@ -98,27 +99,29 @@
                     <div class="relative">
                         <!-- Bouton pour ouvrir/fermer le menu déroulant -->
                         <button @click="dropdownOpen = !dropdownOpen">
-                            <img src="{{ asset('mainassets/images/profile.png') }}" alt="Profile" class="w-10 h-10 rounded-full" />
+                            <img src="<?php echo e(asset('mainassets/images/profile.png')); ?>" alt="Profile" class="w-10 h-10 rounded-full" />
                         </button>
                     
                         <!-- Menu déroulant -->
                         <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 bg-white shadow-md rounded-lg p-2 w-48">
                             <!-- Lien vers le profil -->
-                            <a href="{{ route('profile.edit') }}" class="flex items-center p-2 w-full hover:bg-gray-100">
+                            <a href="<?php echo e(route('profile.edit')); ?>" class="flex items-center p-2 w-full hover:bg-gray-100">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                {{ __('Profile') }}
+                                <?php echo e(__('Profile')); ?>
+
                             </a>
                     
                             <!-- Formulaire de déconnexion -->
-                            <form method="POST" action="{{ route('admin.logout') }}">
-                                @csrf
+                            <form method="POST" action="<?php echo e(route('admin.logout')); ?>">
+                                <?php echo csrf_field(); ?>
                                 <button type="submit" class="flex items-center p-2 w-full hover:bg-gray-100 text-left">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                     </svg>
-                                    {{ __('Log Out') }}
+                                    <?php echo e(__('Log Out')); ?>
+
                                 </button>
                             </form>
                         </div>
@@ -126,37 +129,25 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <div class="p-6 pt-10 pl-8 w-full">
-                <div class="bg-white overflow-hidden shadow-lg rounded-lg mb-8 w-full">
-                    <div class="p-6 bg-[#2563eb] text-black">
-                        <h2 class="text-2xl font-bold">Welcome to Admin Dashboard, {{ Auth::user()->name }}!</h2>
-                        <p class="mt-2 text-black">Manage your system efficiently and securely.</p>
-                    </div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <?php echo $__env->make('admin..profile.partials.update-profile-information-form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
+            </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                    <div class="bg-white p-6 rounded-2xl shadow-lg">
-                        <h3 class="text-gray-500">Total Doctors</h3>
-                        <p class="text-2xl font-bold">1,234</p>
-                        <p class="text-green-500">+5.5%</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-lg">
-                        <h3 class="text-gray-500">Total Specialities</h3>
-                        <p class="text-2xl font-bold">5</p>
-                        <p class="text-red-500">-2.0%</p>
-                    </div>
-                    
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <?php echo $__env->make('admin.profile.partials.update-password-form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
+            </div>
 
-                <div class="mt-10 grid grid-cols-1 gap-6 w-full">
-                    <div class="bg-white p-6 rounded-2xl shadow-lg">
-                        <h3 class="text-gray-500">System Activity</h3>
-                        <div class="h-32 bg-[#f2f4ea] mt-4 rounded"></div>
-                    </div>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <?php echo $__env->make('admin.profile.partials.delete-user-form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+<?php /**PATH C:\Users\nourh\Downloads\Bureau\Master1\Semestre 2\BDD NoSQL\mini projet\monitoring_patient\monitoring_patient\resources\views/admin/profile/edit.blade.php ENDPATH**/ ?>

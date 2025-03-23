@@ -1,34 +1,103 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+echo '# 🏥 Health Care – Laravel & MongoDB
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Une application web pour gérer les patients, développée avec **Laravel** et **MongoDB**.
 
-# Admin / Teacher / User (Login, Register and Dashboard page) 
+---
 
-![alt text](https://github.com/ajayyadavexpo/laravel-11-multi-auth/blob/main/image.png?raw=true)
+## 📌 Fonctionnalités  
+✅ Affichage de la liste des patients  
+✅ Ajout d'un patient via un formulaire  
+✅ Modification des informations d'un patient  
+✅ Suppression d'un patient  
+✅ Interface moderne avec **TailwindCSS** et **Alpine.js**  
 
+---
 
-## YouTube Video (https://www.youtube.com/watch?v=LtzPygnIqn4)
+## 🚀 Installation et Configuration  
 
+### 1️⃣ Cloner le projet  
+\`\`\`sh
+git clone https://github.com/votre-repo/health-care.git
+cd health-care
+\`\`\`
 
-## Laravel + Tailwind Css Starter Project with Multi-Auth (Admin / Teacher and User )
-- Admin login ( http://localhost:8000/admin/login )
-- Teacher login and register (http://localhost:8000/teacher/login )
-- User login and register page (http://localhost:8000/login )
+### 2️⃣ Installer les dépendances  
+\`\`\`sh
+composer install
+npm install && npm run dev
+\`\`\`
 
+### 3️⃣ Configurer l’environnement  
+Copier le fichier \`.env.example\` et le renommer en \`.env\` :  
+\`\`\`sh
+cp .env.example .env
+\`\`\`
+Dans \`.env\`, configurer la connexion MongoDB :  
+\`\`\`env
+DB_CONNECTION=mongodb
+DB_HOST=127.0.0.1
+DB_PORT=27017
+DB_DATABASE=healthcare
+DB_USERNAME=
+DB_PASSWORD=
+\`\`\`
 
+### 4️⃣ Générer la clé de l'application  
+\`\`\`sh
+php artisan key:generate
+\`\`\`
 
-## How to run the code
-- git clone https://github.com/ajayyadavexpo/laravel-11-multi-auth.git
-- cd laravel-11-multi-auth
-- cp .env.example `.env`
-- run : `composer install`
-- run : `php artisan key:generate`
-- run : `php artisan migrate:fresh
-- run : `php artisan serve`
+### 5️⃣ Démarrer le serveur  
+\`\`\`sh
+php artisan serve
+\`\`\`
+L'application sera accessible à **http://127.0.0.1:8000**  
 
-- Best of luck 
+---
+
+## 📂 Structure du Projet  
+\`\`\`
+health-care/
+│── app/
+│   ├── Models/
+│   │   ├── Patient.php   # Modèle Patient pour MongoDB
+│   ├── Http/Controllers/
+│   │   ├── PatientController.php   # Contrôleur pour gérer les patients
+│── resources/views/patients/
+│   ├── index.blade.php   # Interface avec tableau des patients
+│── routes/
+│   ├── web.php   # Routes pour CRUD patients
+│── database/
+│── public/
+│── .env
+│── README.md
+\`\`\`
+
+---
+
+## 📌 Routes API  
+| Méthode  | URL              | Action                 |
+|----------|-----------------|------------------------|
+| \`GET\`    | \`/patients\`      | Afficher tous les patients |
+| \`POST\`   | \`/patients\`      | Ajouter un patient    |
+| \`PUT\`    | \`/patients/{id}\` | Modifier un patient   |
+| \`DELETE\` | \`/patients/{id}\` | Supprimer un patient  |
+
+---
+
+## 🎨 Technologies utilisées  
+- **Laravel** – Framework backend  
+- **MongoDB** – Base de données NoSQL  
+- **TailwindCSS** – Design et mise en page  
+- **Alpine.js** – Gestion des modals  
+
+---
+
+## 📌 Auteur  
+👩‍💻 **Bendjeddou Nourhane** – *Frontend Developer*  
+🔗 [LinkedIn](https://www.linkedin.com/in/votre-profil)  
+
+---
+
+💡 **Ce projet est open-source !** N’hésitez pas à l’améliorer et à proposer des idées. 🚀  
+' > README.md

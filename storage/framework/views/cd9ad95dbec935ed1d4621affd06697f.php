@@ -27,15 +27,6 @@
                     </li>
                     <h3 class="text-lg font-semibold mt-4">Management</h3>
                     <li>
-                        <a href="/admin/specialities" class="flex items-center p-2 rounded hover:bg-[#f2f4ea]">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m-8-8h16"></path>
-                            </svg>
-                            Specialities
-                        </a>
-                    </li>
-                    
-                    <li>
                         <a href="/admin/users" class="flex items-center p-2 rounded hover:bg-[#f2f4ea]">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -53,23 +44,29 @@
                     </li>
                     <h3 class="text-lg font-semibold mt-4">Account</h3>
                     <li>
-                        <a href="/admin/settings" class="flex items-center p-2 rounded hover:bg-[#f2f4ea]">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.121 2.121 0 013 3L7 19H3v-4L16.5 3.5z"></path>
+                        <a href="<?php echo e(route('admin.profile.edit')); ?>" class="flex items-center p-2 w-full hover:bg-gray-100">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
-                            Edit Profile
+                            <?php echo e(__('Profile')); ?>
+
                         </a>
                     </li>
                     
                     <li>
-                        <a href="/logout" class="flex items-center p-2 rounded hover:bg-[#f2f4ea]">
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+                           class="flex items-center p-2 rounded hover:bg-[#f2f4ea]">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H9m4-8V4a2 2 0 00-2-2H5a2 2 0 00-2 2v16a2 2 0 002 2h6a2 2 0 002-2v-4"></path>
                             </svg>
                             Signout
                         </a>
+                    
+                        <form id="logout-form" action="<?php echo e(route('admin.logout')); ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
+                        </form>
                     </li>
+                    
                     
                 </ul>
             </nav>
@@ -117,7 +114,7 @@
                             </a>
                     
                             <!-- Formulaire de déconnexion -->
-                            <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <form method="POST" action="<?php echo e(route('admin.logout')); ?>">
                                 <?php echo csrf_field(); ?>
                                 <button type="submit" class="flex items-center p-2 w-full hover:bg-gray-100 text-left">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
